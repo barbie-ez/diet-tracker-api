@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeightLossTracker.Api", "..\WeightLossTracker.Api\WeightLossTracker.Api.csproj", "{1DA4D916-93FA-4D32-B83C-32AFDE9F7A2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeightLossTracker.Api", "..\WeightLossTracker.Api\WeightLossTracker.Api.csproj", "{1DA4D916-93FA-4D32-B83C-32AFDE9F7A2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeightLossTracker.DataStore", "..\WeightLossTracker.DataStore\WeightLossTracker.DataStore.csproj", "{2C21A844-713B-4E31-AC62-0A286213D021}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeightLossTracker.DataStore", "..\WeightLossTracker.DataStore\WeightLossTracker.DataStore.csproj", "{2C21A844-713B-4E31-AC62-0A286213D021}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeightLossTracker.DataStoreTest", "..\WeightLossTracker.DataStoreTest\WeightLossTracker.DataStoreTest.csproj", "{C88012C7-209F-40F1-A65B-47FF79AD6E9D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeightLossTracker.IdentityServer", "..\WeightLossTracker.IdentityServer\WeightLossTracker.IdentityServer.csproj", "{B52631F7-486B-41B2-AF40-AAB6D17E2B33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeightLossTracker.DataStoreTest", "..\WeightLossTracker.DataStoreTest\WeightLossTracker.DataStoreTest.csproj", "{C88012C7-209F-40F1-A65B-47FF79AD6E9D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,9 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{1DA4D916-93FA-4D32-B83C-32AFDE9F7A2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -60,17 +55,11 @@ Global
 		{C88012C7-209F-40F1-A65B-47FF79AD6E9D}.Release|x64.Build.0 = Release|Any CPU
 		{C88012C7-209F-40F1-A65B-47FF79AD6E9D}.Release|x86.ActiveCfg = Release|Any CPU
 		{C88012C7-209F-40F1-A65B-47FF79AD6E9D}.Release|x86.Build.0 = Release|Any CPU
-		{B52631F7-486B-41B2-AF40-AAB6D17E2B33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B52631F7-486B-41B2-AF40-AAB6D17E2B33}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B52631F7-486B-41B2-AF40-AAB6D17E2B33}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{B52631F7-486B-41B2-AF40-AAB6D17E2B33}.Debug|x64.Build.0 = Debug|Any CPU
-		{B52631F7-486B-41B2-AF40-AAB6D17E2B33}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B52631F7-486B-41B2-AF40-AAB6D17E2B33}.Debug|x86.Build.0 = Debug|Any CPU
-		{B52631F7-486B-41B2-AF40-AAB6D17E2B33}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B52631F7-486B-41B2-AF40-AAB6D17E2B33}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B52631F7-486B-41B2-AF40-AAB6D17E2B33}.Release|x64.ActiveCfg = Release|Any CPU
-		{B52631F7-486B-41B2-AF40-AAB6D17E2B33}.Release|x64.Build.0 = Release|Any CPU
-		{B52631F7-486B-41B2-AF40-AAB6D17E2B33}.Release|x86.ActiveCfg = Release|Any CPU
-		{B52631F7-486B-41B2-AF40-AAB6D17E2B33}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BCCD0973-D57F-4EE9-84B0-C81136AA6B71}
 	EndGlobalSection
 EndGlobal

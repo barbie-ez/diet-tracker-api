@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using IdentityServer4.Quickstart.UI;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -40,7 +43,24 @@ namespace WeightLossTracker.IdentityServer
                 .AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
                 .AddInMemoryClients(IdentityServerConfig.GetClients())
                 .AddTestUsers(IdentityServerConfig.GetUsers())
-            ;
+                .AddInMemoryApiResources(IdentityServerConfig.GetApiResources());
+
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
+            services.AddAuthentication(options => {
+                options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+            .AddOpenIdConnect(options =>
+            {
+                options.Authority = "https://localhost:44310/";
+                options.ClientId = "WeightLossTrackerAuth";
+                options.SaveTokens = true;
+                options.TokenValidationParameters.NameClaimType = "name";
+            })
+            .AddCookie();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +78,8 @@ namespace WeightLossTracker.IdentityServer
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             AccountOptions.ShowLogoutPrompt = false;
             AccountOptions.AutomaticRedirectAfterSignOut = true;

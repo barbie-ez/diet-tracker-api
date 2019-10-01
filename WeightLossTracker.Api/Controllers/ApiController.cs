@@ -2,14 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WeightLossTracker.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class ApiController : ControllerBase
     {
+        [Route("text/welcome")]
+        [Authorize]
+        public IActionResult GetWelcomeText()
+        {
+            return Content($"Welcome {User.Identity.Name}");
+        }
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()

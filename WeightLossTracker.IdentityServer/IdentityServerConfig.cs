@@ -19,8 +19,15 @@ namespace WeightLossTracker.IdentityServer
                 new IdentityResources.Profile()
             };
         }
+        public static IEnumerable<ApiResource> GetApiResources()
+        {
+            return new List<ApiResource>
+            {
+                new ApiResource("WeightLossTrackerApi")
+            };
+        }
 
-        public static IEnumerable<Client> GetClients()
+            public static IEnumerable<Client> GetClients()
         {
             return new List<Client>
             {
@@ -29,9 +36,20 @@ namespace WeightLossTracker.IdentityServer
                     ClientId="WeightLossTrackerAuth",
                     ClientName="WeightLossTrackerAuth Client",
                     AllowedGrantTypes= new List<string>(){GrantType.Implicit},
-                    RedirectUris={"http://localhost:44343/signin-odic"},
-                    PostLogoutRedirectUris= new List<string>{"http://localhost:44343/signout-callback-odic"},
+                    RedirectUris={"https://localhost:44310/signin-odic"},
+                    PostLogoutRedirectUris= new List<string>{"https://localhost:44310/signout-callback-odic"},
                     AllowedScopes= new List<string>
+                    {
+                       "WeightLossTrackerApi"
+                    }
+                },
+
+                new Client
+                {
+                    ClientId="WeightLossTrackerApp",
+                    AllowedGrantTypes= new List<string>(){GrantType.ClientCredentials},
+                    ClientSecrets= new [] {new Secret("MySecret".Sha256())},
+                     AllowedScopes= new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
