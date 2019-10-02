@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WeightLossTracker.DataStore.Constants;
 using WeightLossTracker.DataStore.Entitties;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace WeightLossTracker.DataStore.DataContext
 {
