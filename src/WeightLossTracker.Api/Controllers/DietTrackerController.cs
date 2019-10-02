@@ -9,7 +9,7 @@ using WeightLossTracker.DataStore.Repositories.Interface;
 
 namespace WeightLossTracker.Api.Controllers
 {
-    [Route("api/members/[memberId]/dietTracker")]
+    [Route("api/dietTracker")]
     [ApiController]
     public class DietTrackerController : ControllerBase
     {

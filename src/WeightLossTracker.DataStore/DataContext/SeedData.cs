@@ -49,6 +49,11 @@ namespace WeightLossTracker.DataStore.DataContext
                 {
                     UserProfileModel newUser = new UserProfileModel();
                     newUser.Email = newUser.UserName = "admisnistrator@gmail.com";
+                    newUser.FirstName = newUser.UserName = "Barbara";
+                    newUser.LastName = newUser.UserName = "Ezomo";
+                    newUser.Height = 170.0F;
+                    newUser.CurrentWeight = 89.3F;
+                    newUser.DateOfBirth = new DateTimeOffset(DateTime.Now);
                     newUser.PhoneNumber = "07038875015";
 
                     var result = _manager.CreateAsync(newUser, "Password@1").GetAwaiter().GetResult();
@@ -83,7 +88,11 @@ namespace WeightLossTracker.DataStore.DataContext
                 UserProfileModel newUser = new UserProfileModel();
                 newUser.Email = newUser.UserName = "member@gmail.com";
                 newUser.PhoneNumber = "07038875015";
-
+                newUser.FirstName = newUser.UserName = "Barbara";
+                newUser.LastName = newUser.UserName = "Ezomo";
+                newUser.Height = 170.0F;
+                newUser.CurrentWeight = 89.3F;
+                newUser.DateOfBirth = new DateTimeOffset(DateTime.Now);
                 var result = _manager.CreateAsync(newUser, "Password@1").GetAwaiter().GetResult();
                 var token = _manager.GenerateEmailConfirmationTokenAsync(newUser).GetAwaiter().GetResult();
                 var confirmEmail = _manager.ConfirmEmailAsync(newUser, token).GetAwaiter().GetResult();

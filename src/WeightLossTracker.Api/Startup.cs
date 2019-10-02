@@ -84,6 +84,7 @@ namespace WeightLossTracker.Api
             services.AddTransient<IFoodRepository, FoodRepository>();
             services.AddTransient<IDietTrackerRepository, DietTrackerRepository>();
             services.AddTransient<IMealCategoryRepository, MealCategoryRepository>();
+            services.AddTransient<IWeightHistoryRepository, WeightHistoryRepository>();
 
             var mappingConfig = new MapperConfiguration(mc =>
             {

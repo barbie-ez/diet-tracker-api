@@ -16,7 +16,7 @@ namespace WeightLossTracker.Api
     {
         public static void Main(string[] args)
         {
-            var host = CreateWebHostBuilder(args);
+            var host = CreateWebHostBuilder(args).Build();
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
@@ -34,10 +34,10 @@ namespace WeightLossTracker.Api
             host.Run();
         }
 
-        public static IWebHost CreateWebHostBuilder(string[] args) =>
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .UseUrls("http://localhost:4000")
-                .Build();
+                ;
     }
 }
