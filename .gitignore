@@ -1,0 +1,10 @@
+src/.vs/
+src/WeightLossTracker/.vs
+/.vs
+src/WeightLossTracker.Api/bin
+src/WeightLossTracker.Api/obj
+src/WeightLossTracker.Api/Properties
+/src/WeightLossTracker.DataStore/bin/Debug/netstandard2.0
+/src/WeightLossTracker.DataStore/obj
+/src/WeightLossTracker.DataStoreTest/bin/Debug/netcoreapp2.1
+/src/WeightLossTracker.DataStoreTest/obj
