@@ -7022,11 +7022,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\barezomo.EA\\source\\repos\\WeightLossTracker\\WeightLossTracker.DataStoreTest\\WeightLossTracker.DataStoreTest.csproj",
+      "projectUniqueName": "C:\\Users\\barezomo.EA\\source\\repos\\WeightLossTracker\\src\\WeightLossTracker.DataStoreTest\\WeightLossTracker.DataStoreTest.csproj",
       "projectName": "WeightLossTracker.DataStoreTest",
-      "projectPath": "C:\\Users\\barezomo.EA\\source\\repos\\WeightLossTracker\\WeightLossTracker.DataStoreTest\\WeightLossTracker.DataStoreTest.csproj",
+      "projectPath": "C:\\Users\\barezomo.EA\\source\\repos\\WeightLossTracker\\src\\WeightLossTracker.DataStoreTest\\WeightLossTracker.DataStoreTest.csproj",
       "packagesPath": "C:\\Users\\barezomo.EA\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\barezomo.EA\\source\\repos\\WeightLossTracker\\WeightLossTracker.DataStoreTest\\obj\\",
+      "outputPath": "C:\\Users\\barezomo.EA\\source\\repos\\WeightLossTracker\\src\\WeightLossTracker.DataStoreTest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -7045,8 +7045,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Users\\barezomo.EA\\source\\repos\\WeightLossTracker\\WeightLossTracker.DataStore\\WeightLossTracker.DataStore.csproj": {
-              "projectPath": "C:\\Users\\barezomo.EA\\source\\repos\\WeightLossTracker\\WeightLossTracker.DataStore\\WeightLossTracker.DataStore.csproj"
+            "C:\\Users\\barezomo.EA\\source\\repos\\WeightLossTracker\\src\\WeightLossTracker.DataStore\\WeightLossTracker.DataStore.csproj": {
+              "projectPath": "C:\\Users\\barezomo.EA\\source\\repos\\WeightLossTracker\\src\\WeightLossTracker.DataStore\\WeightLossTracker.DataStore.csproj"
             }
           }
         }

@@ -3074,11 +3074,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\barezomo.EA\\source\\repos\\WeightLossTracker\\WeightLossTracker.DataStore\\WeightLossTracker.DataStore.csproj",
+      "projectUniqueName": "C:\\Users\\barezomo.EA\\source\\repos\\WeightLossTracker\\src\\WeightLossTracker.DataStore\\WeightLossTracker.DataStore.csproj",
       "projectName": "WeightLossTracker.DataStore",
-      "projectPath": "C:\\Users\\barezomo.EA\\source\\repos\\WeightLossTracker\\WeightLossTracker.DataStore\\WeightLossTracker.DataStore.csproj",
+      "projectPath": "C:\\Users\\barezomo.EA\\source\\repos\\WeightLossTracker\\src\\WeightLossTracker.DataStore\\WeightLossTracker.DataStore.csproj",
       "packagesPath": "C:\\Users\\barezomo.EA\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\barezomo.EA\\source\\repos\\WeightLossTracker\\WeightLossTracker.DataStore\\obj\\",
+      "outputPath": "C:\\Users\\barezomo.EA\\source\\repos\\WeightLossTracker\\src\\WeightLossTracker.DataStore\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
