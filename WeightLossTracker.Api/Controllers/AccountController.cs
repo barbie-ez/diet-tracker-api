@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -14,6 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 using WeightLossTracker.Api.Helpers;
 using WeightLossTracker.DataStore.DTOs;
 using WeightLossTracker.DataStore.Entitties;
+using WeightLossTracker.DataStore.Repositories.Impl;
 
 namespace WeightLossTracker.Api.Controllers
 {
@@ -21,11 +23,11 @@ namespace WeightLossTracker.Api.Controllers
     [ApiController]
     public class AccountController : Controller
     {
-        private UserManager<UserProfileModel> _userManager;
+        private MemberRepository _userManager;
         private readonly SignInManager<UserProfileModel> _signInManager;
         private readonly AppSettings _appSettings;
 
-        public AccountController(UserManager<UserProfileModel> userManager,
+        public AccountController(MemberRepository userManager,
             SignInManager<UserProfileModel> signInManager, IOptions<AppSettings> appSettings)
         {
             _appSettings = appSettings.Value;
@@ -56,9 +58,10 @@ namespace WeightLossTracker.Api.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
+                    new Claim(ClaimTypes.Name, user.Id.ToString()),
                 }),
-                Expires = DateTime.UtcNow.AddDays(7),
+
+                Expires = DateTime.UtcNow.AddHours(3),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -66,7 +69,8 @@ namespace WeightLossTracker.Api.Controllers
 
             await _userManager.UpdateAsync(user);
 
-            return Json(token);
+            
+            return Json(tokenHandler.WriteToken(token));
         }
     }
 }

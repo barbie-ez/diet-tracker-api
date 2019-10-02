@@ -18,6 +18,8 @@ using Microsoft.IdentityModel.Tokens;
 using WeightLossTracker.Api.Helpers;
 using WeightLossTracker.DataStore;
 using WeightLossTracker.DataStore.Entitties;
+using WeightLossTracker.DataStore.Repositories.Impl;
+using WeightLossTracker.DataStore.Repositories.Interface;
 
 namespace WeightLossTracker.Api
 {
@@ -48,6 +50,7 @@ namespace WeightLossTracker.Api
                 config.Tokens.PasswordResetTokenProvider = TokenOptions.DefaultEmailProvider;
             })
             .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddUserManager<MemberRepository>()
             .AddDefaultTokenProviders();
 
             services.AddCors();
@@ -76,6 +79,10 @@ namespace WeightLossTracker.Api
                     ValidateAudience = false
                 };
             });
+
+            services.AddTransient<IFoodRepository, FoodRepository>();
+            services.AddTransient<IDietTrackerRepository, DietTrackerRepository>();
+            services.AddTransient<IMealCategoryRepository, MealCategoryRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

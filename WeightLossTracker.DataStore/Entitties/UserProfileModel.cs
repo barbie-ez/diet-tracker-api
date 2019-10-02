@@ -2,10 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using WeightLossTracker.DataStore.Repositories.Base.Interface;
 
 namespace WeightLossTracker.DataStore.Entitties
 {
-    public class UserProfileModel : IdentityUser
+    public class UserProfileModel : IdentityUser 
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
