@@ -22,5 +22,6 @@ namespace WeightLossTracker.DataStore.Entitties
         public string Token { get; set; }
         public ICollection<UserRoleModel> Roles { get; set; } = new List<UserRoleModel>();
         public ICollection<WeightHistories> WeightHistories { get; set; } = new List<WeightHistories>();
+        public ICollection<DietTrackerModel> DietTrackers { get; set; } = new List<DietTrackerModel>();
     }
 }

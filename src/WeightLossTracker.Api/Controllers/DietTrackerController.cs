@@ -5,51 +5,45 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WeightLossTracker.DataStore.DTOs;
+using WeightLossTracker.DataStore.Repositories.Impl;
 using WeightLossTracker.DataStore.Repositories.Interface;
 
 namespace WeightLossTracker.Api.Controllers
 {
-    [Route("api/dietTracker")]
+    [Route("api/members/{memberId}/dietTracker")]
     [ApiController]
     public class DietTrackerController : ControllerBase
     {
         private IDietTrackerRepository _dietTrackerRepository;
+        private MemberRepository _memberManager;
         private readonly IMapper _mapper;
-        public DietTrackerController(IDietTrackerRepository dietTrackerRepository, IMapper mapper)
+        public DietTrackerController(IDietTrackerRepository dietTrackerRepository, MemberRepository memberManager, IMapper mapper)
         {
             _dietTrackerRepository = dietTrackerRepository;
+            _memberManager = memberManager;
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet()]
+        public async Task<IActionResult> GetDietEntryForMember(string memberId)
         {
-            return new string[] { "value1", "value2" };
-        }
+            var user = _memberManager.FindByIdAsync(memberId);
+            if (user == null)
+            {
+                return NotFound();
+            }
 
-        // GET: api/DietTracker/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+            var dietEntryFromRepo = await _dietTrackerRepository.FindByAsync(r => r.MemberId == memberId);
 
-        // POST: api/DietTracker
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+            if (dietEntryFromRepo == null)
+            {
+                return NotFound();
+            }
 
-        // PUT: api/DietTracker/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+            var dietEntry = _mapper.Map<DietEntryDto>(dietEntryFromRepo);
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return Ok(dietEntry);
         }
     }
 }

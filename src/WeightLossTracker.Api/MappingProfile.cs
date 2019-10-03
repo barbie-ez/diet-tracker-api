@@ -22,7 +22,16 @@ namespace WeightLossTracker.Api
                 .ForMember(dest => dest.Age,
                                         opt => opt.MapFrom(src => src.DateOfBirth.GetCurrentAge()))
                 .ForMember(dest => dest.WeightHistories, 
-                                        opt => opt.MapFrom(src => src.WeightHistories));
+                                        opt => opt.MapFrom(src => src.WeightHistories))
+                .ForMember(dest => dest.Weight,
+                                        opt => opt.MapFrom(src => src.CurrentWeight));
+            CreateMap<FoodModel, FoodDto>();
+            CreateMap<WeightHistories, WeightHistoriesDto>();
+            CreateMap<DietTrackerModel, DietEntryDto>()
+                .ForMember(dest => dest.Food,
+                                        opt => opt.MapFrom(src => src.Food))
+                .ForMember(dest => dest.MealCategories,
+                                        opt => opt.MapFrom(src => src.MealCategories));
         }
     }
 }
