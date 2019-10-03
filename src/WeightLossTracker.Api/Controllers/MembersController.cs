@@ -15,6 +15,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using WeightLossTracker.Api.Helpers;
 using WeightLossTracker.DataStore.DTOs;
+using WeightLossTracker.DataStore.DTOs.Content;
 using WeightLossTracker.DataStore.Entitties;
 using WeightLossTracker.DataStore.Repositories.Impl;
 

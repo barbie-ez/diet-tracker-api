@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WeightLossTracker.Api.Helpers;
 using WeightLossTracker.DataStore.DTOs;
+using WeightLossTracker.DataStore.DTOs.Content;
 using WeightLossTracker.DataStore.Entitties;
 
 namespace WeightLossTracker.Api

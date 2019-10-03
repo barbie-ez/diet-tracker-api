@@ -49,6 +49,15 @@ namespace WeightLossTracker.DataStore.Repositories.Base.Impl
             return entity.Id;
         }
 
+
+        public async Task<int> AddBoolReturnAsync(T entity)
+        {
+            EntityEntry dbEntityEntry = _context.Entry<T>(entity);
+            _context.Set<T>().Add(entity);
+            await _context.SaveChangesAsync();
+            return entity.Id;
+        }
+
         public async Task UpdateAsync(T entity)
         {
             EntityEntry dbEntityEntny = _context.Entry<T>(entity);
