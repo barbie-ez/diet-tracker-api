@@ -7,15 +7,18 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Swashbuckle.AspNetCore.Swagger;
 using WeightLossTracker.Api.Helpers;
 using WeightLossTracker.DataStore;
 using WeightLossTracker.DataStore.Entitties;
@@ -51,12 +54,17 @@ namespace WeightLossTracker.Api
                 config.Tokens.PasswordResetTokenProvider = TokenOptions.DefaultEmailProvider;
             })
             .AddEntityFrameworkStores<ApplicationDbContext>()
-            .AddUserManager<MemberRepository>()
+            .AddUserManager<MemberRepository>() 
             .AddDefaultTokenProviders();
 
             services.AddCors();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(setupAction =>
+            {
+                setupAction.ReturnHttpNotAcceptable = true;
+                setupAction.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());
+                setupAction.InputFormatters.Add(new XmlSerializerInputFormatter(setupAction));
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
@@ -94,6 +102,15 @@ namespace WeightLossTracker.Api
             IMapper mapper = mappingConfig.CreateMapper();
 
             services.AddSingleton(mapper);
+
+            services.AddSwaggerGen(setupAction =>
+            {
+                setupAction.SwaggerDoc("DietTrackerOpenApiSpecification", 
+                    new Info() {
+                        Title= "Diet tracker API",
+                        Version="1"
+                    });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -106,7 +123,14 @@ namespace WeightLossTracker.Api
             else
             {
                 app.UseHsts();
+                app.UseExceptionHandler(appBuilder =>
+                                            appBuilder.Run(async context =>
+                                            {
+                                                context.Response.StatusCode = 500;
+                                                await context.Response.WriteAsync("An unexpected server side error occured");
+                                            }));
             }
+
             app.UseCors(x => x
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
@@ -115,6 +139,12 @@ namespace WeightLossTracker.Api
             app.UseAuthentication();
 
             app.UseHttpsRedirection();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(setupAction=> {
+                setupAction.SwaggerEndpoint
+                    ("/swagger/DietTrackerOpenApiSpecification/swagger.json","Diet Tracker API");
+            });
             app.UseMvc();
         }
     }

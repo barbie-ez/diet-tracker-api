@@ -91,9 +91,13 @@ namespace WeightLossTracker.Api.Controllers
 
             if(Id == 0)
             {
-                throw
+                throw new Exception("Creation of diet tracker failed due to ");
             }
 
+
+            var dietEntryoReturn = _mapper.Map<DietEntryDto>(dietEntryToAdd);
+
+            return CreatedAtRoute("GetDietEntryForMember",new { memberId =memberId, Id = Id}, dietEntryoReturn);
         }
     }
 }

@@ -33,6 +33,11 @@ namespace WeightLossTracker.Api
                                         opt => opt.MapFrom(src => src.Food))
                 .ForMember(dest => dest.MealCategories,
                                         opt => opt.MapFrom(src => src.MealCategories));
+            CreateMap<DietEntryDto, DietTrackerModel> ()
+                .ForMember(dest => dest.Food,
+                                        opt => opt.MapFrom(src => src.Food))
+                .ForMember(dest => dest.MealCategories,
+                                        opt => opt.MapFrom(src => src.MealCategories));
         }
     }
 }
