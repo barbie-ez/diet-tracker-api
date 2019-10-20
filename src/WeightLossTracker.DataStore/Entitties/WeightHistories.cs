@@ -10,5 +10,7 @@ namespace WeightLossTracker.DataStore.Entitties
         [Required(ErrorMessage ="The weight field is required")]
         public float Weight { get; set; }
         public string Comment { get; set; }
+        public UserProfileModel User { get; set; }
+        public string UserId { get; set; }
     }
 }
