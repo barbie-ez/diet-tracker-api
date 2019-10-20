@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WeightLossTracker.Api</name>
+    </assembly>
+    <members>
+        <member name="M:WeightLossTracker.Api.Controllers.MembersController.Login(WeightLossTracker.DataStore.DTOs.Content.UserDto)">
+            <summary>
+            Get Token to authorise session
+            </summary>
+            <param name="userdto">The username and password for login</param>
+            <returns>a jwt token to authorise session</returns>
+        </member>
+    </members>
+</doc>

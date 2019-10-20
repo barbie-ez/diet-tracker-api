@@ -39,6 +39,11 @@ namespace WeightLossTracker.Api.Controllers
             _signInManager = signInManager;
             _mapper = mapper;
         }
+        /// <summary>
+        /// Get Token to authorise session
+        /// </summary>
+        /// <param name="userdto">The username and password for login</param>
+        /// <returns>a jwt token to authorise session</returns>
         [AllowAnonymous]
         [HttpPost("login")]
         public async Task<JsonResult> Login([FromBody] UserDto userdto)
@@ -79,7 +84,7 @@ namespace WeightLossTracker.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task <IActionResult> GetProfileInformation(string id)
+        public async Task <ActionResult<UserProfileDto>> GetProfileInformation(string id)
         {
             var memberfromRepo = await _memberManager.FindByIdAsync(id);
 

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -108,8 +110,25 @@ namespace WeightLossTracker.Api
                 setupAction.SwaggerDoc("DietTrackerOpenApiSpecification", 
                     new Info() {
                         Title= "Diet tracker API",
-                        Version="1"
+                        Version="1",
+                        Description="Through this api you can keep track of the food you eat",
+                        Contact= new Contact
+                        {
+                            Email="ezomo.barbara@gmail.com",
+                            Name="Barbara Ezomo",
+                            Url= "https://www.linkedin.com/in/barbara-ezomo-5997a495/"
+                        },
+                        License=new License
+                        {
+                            Name="MIT License",
+                            Url= "https://opensource.org/licenses/MIT"
+                        }
                     });
+
+                var xmlComments = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory,xmlComments);
+
+                setupAction.IncludeXmlComments(xmlCommentsPath);
             });
         }
 
@@ -144,6 +163,9 @@ namespace WeightLossTracker.Api
             app.UseSwaggerUI(setupAction=> {
                 setupAction.SwaggerEndpoint
                     ("/swagger/DietTrackerOpenApiSpecification/swagger.json","Diet Tracker API");
+                setupAction.RoutePrefix="";
+
+                
             });
             app.UseMvc();
         }

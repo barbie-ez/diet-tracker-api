@@ -29,7 +29,7 @@ namespace WeightLossTracker.Api.Controllers
         }
 
         [HttpGet()]
-        public async Task<IActionResult> GetDietEntrysForMember(string memberId)
+        public async Task<ActionResult<DietEntryDto>> GetDietEntrysForMember(string memberId)
         {
             var user = _memberManager.FindByIdAsync(memberId);
             if (user == null)
@@ -50,7 +50,7 @@ namespace WeightLossTracker.Api.Controllers
         }
 
         [HttpGet("{id}", Name = "GetDietEntryForMember")]
-        public async Task<IActionResult> GetDietEntryForMember(string memberId, int id)
+        public async Task<ActionResult<DietEntryDto>> GetDietEntryForMember(string memberId, int id)
         {
             var user = _memberManager.FindByIdAsync(memberId);
             if (user == null)
