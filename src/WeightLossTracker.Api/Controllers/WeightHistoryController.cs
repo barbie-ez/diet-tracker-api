@@ -84,7 +84,7 @@ namespace WeightLossTracker.Api.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [Produces("application/xml", "application/json")]
         [HttpPost()]
-        public async Task<IActionResult> AddWeightHistoryForMember(string memberId, [FromBody] WeightHistoriesCreationDto weightHistoryDTO)
+        public async Task<ActionResult<WeightHistoriesDto>> AddWeightHistoryForMember(string memberId, [FromBody] WeightHistoriesCreationDto weightHistoryDTO)
         {
             if (weightHistoryDTO == null)
             {
@@ -121,7 +121,7 @@ namespace WeightLossTracker.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [Produces("application/xml", "application/json")]
         [HttpPut("{id}", Name = "UpdateWeightHistoryForMember")]
-        public async Task<ActionResult<DietEntryDto>> UpdateWeightHistoryForMember(string memberId, int id, [FromBody] WeightHistoriesCreationDto weightHistoryDTO)
+        public async Task<ActionResult<WeightHistoriesDto>> UpdateWeightHistoryForMember(string memberId, int id, [FromBody] WeightHistoriesCreationDto weightHistoryDTO)
         {
             if (weightHistoryDTO == null)
             {
@@ -161,7 +161,7 @@ namespace WeightLossTracker.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [Produces("application/xml", "application/json")]
         [HttpPatch("{id}", Name = "PartiallyUpdateWeightHistoryForMember")]
-        public async Task<ActionResult<DietEntryDto>> PartiallyUpdateWeightHistoryForMember(string memberId, int id, [FromBody] JsonPatchDocument patchDoc)
+        public async Task<ActionResult<WeightHistoriesDto>> PartiallyUpdateWeightHistoryForMember(string memberId, int id, [FromBody] JsonPatchDocument patchDoc)
         {
             if (patchDoc == null)
             {

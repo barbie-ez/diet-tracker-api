@@ -28,6 +28,9 @@ namespace WeightLossTracker.Api
                 .ForMember(dest => dest.Weight,
                                         opt => opt.MapFrom(src => src.CurrentWeight));
             CreateMap<FoodModel, FoodDto>();
+            CreateMap<FoodDto, FoodModel>();
+            CreateMap<FoodCreationDto, FoodModel>();
+            CreateMap<FoodCreationDto, FoodDto>();
             CreateMap<MealCategoriesModel, MealCategoriesDto>();
             CreateMap<MealCategoriesCreationDto, MealCategoriesDto>();
             CreateMap<WeightHistories, WeightHistoriesDto>();

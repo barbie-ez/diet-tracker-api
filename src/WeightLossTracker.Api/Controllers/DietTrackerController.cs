@@ -33,7 +33,7 @@ namespace WeightLossTracker.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [Produces("application/xml", "application/json")]
         [HttpGet()]
-        public async Task<ActionResult<DietEntryDto>> GetDietEntrysForMember(string memberId)
+        public async Task<ActionResult<IEnumerable<DietEntryDto>>> GetDietEntrysForMember(string memberId)
         {
             var user = _memberManager.FindByIdAsync(memberId);
             if (user == null)
@@ -83,7 +83,7 @@ namespace WeightLossTracker.Api.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [Produces("application/xml", "application/json")]
         [HttpPost()]
-        public async Task<IActionResult> CreateDietEntryForMember(string memberId, [FromBody] DietEntryCreationDto dietEntry)
+        public async Task<ActionResult<DietEntryDto>> CreateDietEntryForMember(string memberId, [FromBody] DietEntryCreationDto dietEntry)
         {
             if(dietEntry == null)
             {

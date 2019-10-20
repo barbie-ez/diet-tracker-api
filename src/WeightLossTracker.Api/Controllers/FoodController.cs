@@ -27,11 +27,11 @@ namespace WeightLossTracker.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [Produces("application/xml", "application/json")]
         [HttpGet()]
-        public async Task<ActionResult<FoodDto>> GetFoods()
+        public async Task<ActionResult<IEnumerable<FoodDto>>> GetFoods()
         {
             var foodFromRepo = await _food.GetAllAsync();
 
-            var foodDTO = _mapper.Map<IEnumerable<MealCategoriesDto>>(foodFromRepo);
+            var foodDTO = _mapper.Map<IEnumerable<FoodDto>>(foodFromRepo);
 
             return Ok(foodDTO);
         }
@@ -80,9 +80,9 @@ namespace WeightLossTracker.Api.Controllers
                 throw new Exception("An error occured while creating this meal category");
             }
 
-            var mealCatgeoryToReturn = _mapper.Map<FoodDto>(foodCreationDTO);
+            var foodToReturn = _mapper.Map<FoodDto>(foodCreationDTO);
 
-            return CreatedAtRoute("GetFood", new { id = id }, foodCreationDTO);
+            return CreatedAtRoute("GetFood", new { id = id }, foodToReturn);
         }
 
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -90,7 +90,7 @@ namespace WeightLossTracker.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [Produces("application/xml", "application/json")]
         [HttpPut("{id}", Name = "UpdateFood")]
-        public async Task<ActionResult<MealCategoriesDto>> UpdateFood(int id, [FromBody] FoodCreationDto foodToUpdateDTO)
+        public async Task<ActionResult<FoodDto>> UpdateFood(int id, [FromBody] FoodCreationDto foodToUpdateDTO)
         {
             if (foodToUpdateDTO == null)
             {
@@ -122,7 +122,7 @@ namespace WeightLossTracker.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [Produces("application/xml", "application/json")]
         [HttpPatch("{id}", Name = "PartiallyUpdateFood")]
-        public async Task<ActionResult<MealCategoriesDto>> PartiallyUpdateFood(int id, [FromBody] JsonPatchDocument patchDoc)
+        public async Task<ActionResult<FoodDto>> PartiallyUpdateFood(int id, [FromBody] JsonPatchDocument patchDoc)
         {
             if (patchDoc == null)
             {

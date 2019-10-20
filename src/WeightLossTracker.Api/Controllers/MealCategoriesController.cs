@@ -28,7 +28,7 @@ namespace WeightLossTracker.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [Produces("application/xml", "application/json")]
         [HttpGet()]
-        public async Task<ActionResult<MealCategoriesDto>> GetMealCategories()
+        public async Task<ActionResult<IEnumerable<MealCategoriesDto>>> GetMealCategories()
         {
             var mealCategoriesFromRepo = await _mealCategory.GetAllAsync();
 
