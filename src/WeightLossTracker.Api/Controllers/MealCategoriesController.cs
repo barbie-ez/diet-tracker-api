@@ -118,5 +118,35 @@ namespace WeightLossTracker.Api.Controllers
 
             return NoContent();
         }
+
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [Produces("application/xml", "application/json")]
+        [HttpDelete("{id}", Name = "DeleteMealCategory")]
+        public async Task<ActionResult<MealCategoriesDto>> DeleteMealCategory(int id)
+        {
+            if (id == 0)
+            {
+                return BadRequest();
+            }
+            var mealCategoriesFromRepo = await _mealCategory.GetFirstAsync(r => r.Id == id);
+
+            if (mealCategoriesFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                await _mealCategory.DeleteAsync(mealCategoriesFromRepo);
+            }
+            catch (Exception)
+            {
+                throw new Exception("deletion of meal categories failed");
+            }
+
+            return NoContent();
+        }
     }
 }
