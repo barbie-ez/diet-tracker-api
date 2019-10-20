@@ -17,7 +17,7 @@ namespace WeightLossTracker.Api.Controllers
 {
     [Route("api/members/{memberId}/dietTracker")]
     [ApiController]
-    public class DietTrackerController : ControllerBase
+    public class DietTrackerController : Controller
     {
         private IDietTrackerRepository _dietTrackerRepository;
         private MemberRepository _memberManager;
@@ -111,25 +111,7 @@ namespace WeightLossTracker.Api.Controllers
 
             return CreatedAtRoute("GetDietEntryForMember",new { memberId =memberId, Id = Id}, dietEntryoReturn);
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="memberId">User of the diet tracker</param>
-        /// <param name="id">the id of the diet entry you want to update</param>
-        /// <param name="patchDoc">the set of operations to apply to the diet entry</param>
-        /// <returns>an ActionResult of Type Author</returns>
-        /// <remarks>
-        /// Sample request
-        /// this request updates the portion size of the food
-        /// PATCH /members/{memberId}/dietTracker/{id}\
-        /// [\
-        ///     {\
-        ///         "op":"replace",\
-        ///         "path":"/PortionSize"\
-        ///         "value":1\
-        ///     }\
-        /// ]
-        /// </remarks>
+
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -170,13 +152,32 @@ namespace WeightLossTracker.Api.Controllers
 
             return NoContent();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="memberId">User of the diet tracker</param>
+        /// <param name="id">the id of the diet entry you want to update</param>
+        /// <param name="patchDoc">the set of operations to apply to the diet entry</param>
+        /// <returns>an ActionResult of Type Author</returns>
+        /// <remarks>
+        /// Sample request
+        /// this request updates the portion size of the food
+        /// PATCH /members/{memberId}/dietTracker/{id}\
+        /// [\
+        ///     {\
+        ///         "op":"replace",\
+        ///         "path":"/PortionSize"\
+        ///         "value":1\
+        ///     }\
+        /// ]
+        /// </remarks>
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [Produces("application/xml", "application/json")]
-        [HttpPatch("{id}", Name = "UpdateDietEntryForMember")]
-        public async Task<ActionResult<DietEntryDto>> UpdateDietEntryForMember(string memberId, int id, [FromBody]JsonPatchDocument patchDoc)
+        [HttpPatch("{id}", Name = "PartiallyUpdateDietEntryForMember")]
+        public async Task<ActionResult<DietEntryDto>> PartiallyUpdateDietEntryForMember(string memberId, int id, [FromBody]JsonPatchDocument patchDoc)
         {
             if (patchDoc == null)
             {
@@ -210,6 +211,45 @@ namespace WeightLossTracker.Api.Controllers
             catch (Exception)
             {
                 throw new Exception("update of diet tracker failed");
+            }
+
+            return NoContent();
+        }
+
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [Produces("application/xml", "application/json")]
+        [HttpDelete("{id}", Name = "DeleteDietEntryForMember")]
+        public async Task<ActionResult<DietEntryDto>> DeleteDietEntryForMember(string memberId, int id)
+        {
+            if (id == 0)
+            {
+                return BadRequest();
+            }
+
+            var user = await _memberManager.FindByIdAsync(memberId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var dietForMember = await _dietTrackerRepository.GetFirstAsync(r => r.Id == 1d && r.MemberId==memberId);
+
+            if (dietForMember == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                await _dietTrackerRepository.DeleteAsync(dietForMember);
+            }
+            catch (Exception)
+            {
+                throw new Exception("delete of diet entry failed");
             }
 
             return NoContent();

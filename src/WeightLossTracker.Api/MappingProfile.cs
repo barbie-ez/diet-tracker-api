@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using WeightLossTracker.Api.Helpers;
 using WeightLossTracker.DataStore.DTOs;
 using WeightLossTracker.DataStore.DTOs.Content;
+using WeightLossTracker.DataStore.DTOs.Creation;
 using WeightLossTracker.DataStore.Entitties;
 
 namespace WeightLossTracker.Api
@@ -27,6 +28,8 @@ namespace WeightLossTracker.Api
                 .ForMember(dest => dest.Weight,
                                         opt => opt.MapFrom(src => src.CurrentWeight));
             CreateMap<FoodModel, FoodDto>();
+            CreateMap<MealCategoriesModel, MealCategoriesDto>();
+            CreateMap<MealCategoriesCreationDto, MealCategoriesDto>();
             CreateMap<WeightHistories, WeightHistoriesDto>();
             CreateMap<DietTrackerModel, DietEntryDto>()
                 .ForMember(dest => dest.Food,

@@ -4,7 +4,7 @@
         <name>WeightLossTracker.Api</name>
     </assembly>
     <members>
-        <member name="M:WeightLossTracker.Api.Controllers.DietTrackerController.UpdateDietEntryForMember(System.String,System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument)">
+        <member name="M:WeightLossTracker.Api.Controllers.DietTrackerController.PartiallyUpdateDietEntryForMember(System.String,System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument)">
             <summary>
             
             </summary>
@@ -24,7 +24,6 @@
                 }\
             ]
             </remarks>
-             [ProducesResponseType(StatusCodes.Status404NotFound)]
         </member>
         <member name="M:WeightLossTracker.Api.Controllers.MembersController.Login(WeightLossTracker.DataStore.DTOs.Content.UserDto)">
             <summary>
