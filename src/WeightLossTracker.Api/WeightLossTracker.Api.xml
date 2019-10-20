@@ -4,6 +4,28 @@
         <name>WeightLossTracker.Api</name>
     </assembly>
     <members>
+        <member name="M:WeightLossTracker.Api.Controllers.DietTrackerController.UpdateDietEntryForMember(System.String,System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument)">
+            <summary>
+            
+            </summary>
+            <param name="memberId">User of the diet tracker</param>
+            <param name="id">the id of the diet entry you want to update</param>
+            <param name="patchDoc">the set of operations to apply to the diet entry</param>
+            <returns>an ActionResult of Type Author</returns>
+            <remarks>
+            Sample request
+            this request updates the portion size of the food
+            PATCH /members/{memberId}/dietTracker/{id}\
+            [\
+                {\
+                    "op":"replace",\
+                    "path":"/PortionSize"\
+                    "value":1\
+                }\
+            ]
+            </remarks>
+             [ProducesResponseType(StatusCodes.Status404NotFound)]
+        </member>
         <member name="M:WeightLossTracker.Api.Controllers.MembersController.Login(WeightLossTracker.DataStore.DTOs.Content.UserDto)">
             <summary>
             Get Token to authorise session
