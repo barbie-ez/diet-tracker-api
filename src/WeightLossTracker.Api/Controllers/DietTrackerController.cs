@@ -198,7 +198,7 @@ namespace WeightLossTracker.Api.Controllers
                 return NotFound();
             }
 
-            var dietEntryToPatch = _mapper.Map<DietEntryDto>(dietForMember);
+            var dietEntryToPatch = _mapper.Map<DietEntryCreationDto>(dietForMember);
 
             patchDoc.ApplyTo(dietEntryToPatch);
 

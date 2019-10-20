@@ -16,7 +16,7 @@ namespace WeightLossTracker.DataStore.Entitties
         public string MemberId { get; set; }
         public FoodModel Food { get; set; }
         [Required(ErrorMessage = "The food Id is required")]
-        public int FoodModelId { get; set; }
+        public int FoodId { get; set; }
         [Required(ErrorMessage = "The portion size is required")]
         public int PortionSize { get; set; }
     }

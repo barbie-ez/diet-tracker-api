@@ -23,27 +23,33 @@ namespace WeightLossTracker.Api
                                         opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"))
                 .ForMember(dest => dest.Age,
                                         opt => opt.MapFrom(src => src.DateOfBirth.GetCurrentAge()))
-                .ForMember(dest => dest.WeightHistories, 
+                .ForMember(dest => dest.WeightHistories,
                                         opt => opt.MapFrom(src => src.WeightHistories))
                 .ForMember(dest => dest.Weight,
                                         opt => opt.MapFrom(src => src.CurrentWeight));
+
             CreateMap<FoodModel, FoodDto>();
             CreateMap<FoodDto, FoodModel>();
             CreateMap<FoodCreationDto, FoodModel>();
             CreateMap<FoodCreationDto, FoodDto>();
+
             CreateMap<MealCategoriesModel, MealCategoriesDto>();
+            CreateMap<MealCategoriesDto, MealCategoriesModel>();
             CreateMap<MealCategoriesCreationDto, MealCategoriesDto>();
+            CreateMap<MealCategoriesCreationDto, MealCategoriesModel>();
+
             CreateMap<WeightHistories, WeightHistoriesDto>();
+            CreateMap<WeightHistoriesDto, WeightHistories>();
+            CreateMap<WeightHistoriesCreationDto, WeightHistories>();
+            CreateMap<WeightHistories, WeightHistoriesCreationDto>();
+
             CreateMap<DietTrackerModel, DietEntryDto>()
                 .ForMember(dest => dest.Food,
                                         opt => opt.MapFrom(src => src.Food))
                 .ForMember(dest => dest.MealCategories,
                                         opt => opt.MapFrom(src => src.MealCategories));
-            CreateMap<DietEntryDto, DietTrackerModel> ()
-                .ForMember(dest => dest.Food,
-                                        opt => opt.MapFrom(src => src.Food))
-                .ForMember(dest => dest.MealCategories,
-                                        opt => opt.MapFrom(src => src.MealCategories));
+            CreateMap<DietEntryCreationDto, DietTrackerModel> ();
+            CreateMap<DietTrackerModel, DietEntryCreationDto> ();
         }
     }
 }
