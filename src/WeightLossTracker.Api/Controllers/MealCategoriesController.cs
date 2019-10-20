@@ -88,7 +88,7 @@ namespace WeightLossTracker.Api.Controllers
 
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [Produces("application/xml", "application/json")]
         [HttpPut("{id}", Name = "UpdateMealCategory")]
         public async Task<ActionResult<MealCategoriesDto>> UpdateMealCategory(int id, [FromBody] MealCategoriesCreationDto mealCategoryDTO)
@@ -98,14 +98,14 @@ namespace WeightLossTracker.Api.Controllers
                 return BadRequest();
             }
 
-            var mealCategoryToFromRepo = _mealCategory.GetFirstAsync(r => r.Id == id);
+            var mealCategoryToFromRepo = await _mealCategory.GetFirstAsync(r => r.Id == id);
 
             if (mealCategoryToFromRepo == null)
             {
                 return NotFound();
             }
 
-            var mealCategoryToUpdate = _mapper.Map<MealCategoriesModel>(mealCategoryDTO);
+            var mealCategoryToUpdate = _mapper.Map(mealCategoryDTO,mealCategoryToFromRepo);
 
             try
             {
@@ -116,9 +116,7 @@ namespace WeightLossTracker.Api.Controllers
                 throw new Exception("could not update meal category");
             }
 
-            var mealCatgeoryToReturn = _mapper.Map<MealCategoriesDto>(mealCategoryDTO);
-
-            return CreatedAtRoute("GetMealCategory", new { id=id} ,mealCategoryDTO);
+            return NoContent();
         }
     }
 }
