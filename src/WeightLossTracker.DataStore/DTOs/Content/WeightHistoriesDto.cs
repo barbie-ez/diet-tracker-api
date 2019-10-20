@@ -8,5 +8,6 @@ namespace WeightLossTracker.DataStore.DTOs.Content
     {
         public float Weight { get; set; }
         public string Comment { get; set; }
+        public DateTime DateCreated { get; set; }
     }
 }

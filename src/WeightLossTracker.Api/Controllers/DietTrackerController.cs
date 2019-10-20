@@ -90,7 +90,7 @@ namespace WeightLossTracker.Api.Controllers
                 return BadRequest();
             }
 
-            var user = _memberManager.FindByIdAsync(memberId);
+            var user = await _memberManager.FindByIdAsync(memberId);
 
             if (user == null)
             {
@@ -132,7 +132,7 @@ namespace WeightLossTracker.Api.Controllers
                 return NotFound();
             }
 
-            var dietForMember = await _dietTrackerRepository.GetFirstAsync(r => r.MemberId == user.Id);
+            var dietForMember = await _dietTrackerRepository.GetFirstAsync(r => r.MemberId == user.Id &&r.Id==id);
 
             if (dietForMember == null)
             {
@@ -191,7 +191,7 @@ namespace WeightLossTracker.Api.Controllers
                 return NotFound();
             }
 
-            var dietForMember = await _dietTrackerRepository.GetFirstAsync(r => r.MemberId == user.Id);
+            var dietForMember = await _dietTrackerRepository.GetFirstAsync(r => r.MemberId == user.Id && r.Id == id);
 
             if (dietForMember == null)
             {
