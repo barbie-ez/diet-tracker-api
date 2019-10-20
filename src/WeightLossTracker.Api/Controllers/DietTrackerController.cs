@@ -41,7 +41,9 @@ namespace WeightLossTracker.Api.Controllers
                 return NotFound();
             }
 
-            var dietEntryFromRepo = await _dietTrackerRepository.FindByAsync(r => r.MemberId == memberId);
+            var dietEntryFromRepo = await _dietTrackerRepository
+                                        .AllIncludingAsync(r => r.MemberId == memberId
+                                        , r => r.Food, r => r.MealCategories);
 
             if (dietEntryFromRepo == null)
             {
@@ -66,7 +68,9 @@ namespace WeightLossTracker.Api.Controllers
                 return NotFound();
             }
 
-            var dietEntryFromRepo = await _dietTrackerRepository.GetFirstAsync(r => r.MemberId == memberId && r.Id==id);
+            var dietEntryFromRepo =  _dietTrackerRepository
+                                        .AllIncludingAsync(r => r.MemberId == memberId && r.Id==id
+                                        ,r=>r.Food,r=>r.MealCategories).GetAwaiter().GetResult().FirstOrDefault();
 
             if (dietEntryFromRepo == null)
             {
@@ -98,6 +102,8 @@ namespace WeightLossTracker.Api.Controllers
             }
 
             var dietEntryToAdd = _mapper.Map<DietTrackerModel>(dietEntry);
+
+            dietEntryToAdd.MemberId = memberId;
 
             var Id = await _dietTrackerRepository.AddReturnAsync(dietEntryToAdd);
 
