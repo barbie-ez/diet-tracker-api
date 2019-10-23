@@ -129,6 +129,14 @@ namespace WeightLossTracker.Api
                 var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory,xmlComments);
 
                 setupAction.IncludeXmlComments(xmlCommentsPath);
+
+                setupAction.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
+                });
             });
         }
 

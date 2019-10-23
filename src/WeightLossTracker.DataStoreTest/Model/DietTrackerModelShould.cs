@@ -1,9 +1,9 @@
 using System;
 using Xunit;
 
-namespace WeightLossTracker.DataStoreTest
+namespace WeightLossTracker.DataStoreTest.Model
 {
-    public class UnitTest1
+    public class DietTrackerModelShould
     {
         [Fact]
         public void Test1()
