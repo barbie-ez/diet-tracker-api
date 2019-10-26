@@ -5,7 +5,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.1-stretch AS build
 WORKDIR /src
-COPY ["../WeightLossTracker.Api/WeightLossTracker.Api.csproj", "../WeightLossTracker.Api/"]
+COPY ["WeightLossTracker.Api.csproj", "../WeightLossTracker.Api/"]
 COPY ["../WeightLossTracker.DataStore/WeightLossTracker.DataStore.csproj", "../WeightLossTracker.DataStore/"]
 RUN dotnet restore "../WeightLossTracker.Api/WeightLossTracker.Api.csproj"
 COPY . .

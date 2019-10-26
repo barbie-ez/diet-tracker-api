@@ -8,3 +8,6 @@ src/WeightLossTracker.Api/Properties
 /src/WeightLossTracker.DataStore/obj
 /src/WeightLossTracker.DataStoreTest/bin/Debug/netcoreapp2.1
 /src/WeightLossTracker.DataStoreTest/obj
+/src/WeightLossTracker/obj/Docker
+/src/WeightLossTracker/obj/Debug
+/src/WeightLossTracker/bin/Debug

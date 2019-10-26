@@ -1,0 +1,43 @@
+version: '3.4'
+
+services:
+  sql_db:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    networks:
+      - sql
+    container_name: sql_db
+    ports:
+      - 1433:1433
+    expose:  
+      - 1433
+    environment:
+      - ACCEPT_EULA=y
+      - SA_PASSWORD=Password@1
+    volumes:
+     - database:/var/opt/mssql
+  sql_database_creator:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    networks:
+      - sql
+    command: bash -c "echo sleep wait a bit till the db is up and running before attempting to create the Allready DB && sleep 7 && /opt/mssql-tools/bin/sqlcmd -S sql_db,1433 -U sa -P Password@1 -Q 'create database dietTrackerdb'"
+    depends_on:
+     - sql_db
+  weightlosstracker.api:
+    build:
+      context: .
+      dockerfile: ../WeightLossTracker.Api/Dockerfile
+    ports:
+      - '1234:1233'
+    networks:
+     - sql
+    environment:
+     - DefaultConnection__ConnectionString=Server=sql_db;Database=dietTrackerdb;User=sa;Password=Password@1
+    restart: on-failure
+    depends_on:
+     - sql_db
+     - sql_database_creator
+networks:
+  sql:
+volumes:
+  database:
+
