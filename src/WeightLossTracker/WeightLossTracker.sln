@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeightLossTracker.DataStore
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeightLossTracker.DataStoreTest", "..\WeightLossTracker.DataStoreTest\WeightLossTracker.DataStoreTest.csproj", "{C88012C7-209F-40F1-A65B-47FF79AD6E9D}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{92077D94-D9B7-43C4-AFFD-F4A0E062798C}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{B67F4A7E-EF87-4CF7-9BB6-165E7C9409E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,18 +57,18 @@ Global
 		{C88012C7-209F-40F1-A65B-47FF79AD6E9D}.Release|x64.Build.0 = Release|Any CPU
 		{C88012C7-209F-40F1-A65B-47FF79AD6E9D}.Release|x86.ActiveCfg = Release|Any CPU
 		{C88012C7-209F-40F1-A65B-47FF79AD6E9D}.Release|x86.Build.0 = Release|Any CPU
-		{92077D94-D9B7-43C4-AFFD-F4A0E062798C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{92077D94-D9B7-43C4-AFFD-F4A0E062798C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{92077D94-D9B7-43C4-AFFD-F4A0E062798C}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{92077D94-D9B7-43C4-AFFD-F4A0E062798C}.Debug|x64.Build.0 = Debug|Any CPU
-		{92077D94-D9B7-43C4-AFFD-F4A0E062798C}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{92077D94-D9B7-43C4-AFFD-F4A0E062798C}.Debug|x86.Build.0 = Debug|Any CPU
-		{92077D94-D9B7-43C4-AFFD-F4A0E062798C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{92077D94-D9B7-43C4-AFFD-F4A0E062798C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{92077D94-D9B7-43C4-AFFD-F4A0E062798C}.Release|x64.ActiveCfg = Release|Any CPU
-		{92077D94-D9B7-43C4-AFFD-F4A0E062798C}.Release|x64.Build.0 = Release|Any CPU
-		{92077D94-D9B7-43C4-AFFD-F4A0E062798C}.Release|x86.ActiveCfg = Release|Any CPU
-		{92077D94-D9B7-43C4-AFFD-F4A0E062798C}.Release|x86.Build.0 = Release|Any CPU
+		{B67F4A7E-EF87-4CF7-9BB6-165E7C9409E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B67F4A7E-EF87-4CF7-9BB6-165E7C9409E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B67F4A7E-EF87-4CF7-9BB6-165E7C9409E4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B67F4A7E-EF87-4CF7-9BB6-165E7C9409E4}.Debug|x64.Build.0 = Debug|Any CPU
+		{B67F4A7E-EF87-4CF7-9BB6-165E7C9409E4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B67F4A7E-EF87-4CF7-9BB6-165E7C9409E4}.Debug|x86.Build.0 = Debug|Any CPU
+		{B67F4A7E-EF87-4CF7-9BB6-165E7C9409E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B67F4A7E-EF87-4CF7-9BB6-165E7C9409E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B67F4A7E-EF87-4CF7-9BB6-165E7C9409E4}.Release|x64.ActiveCfg = Release|Any CPU
+		{B67F4A7E-EF87-4CF7-9BB6-165E7C9409E4}.Release|x64.Build.0 = Release|Any CPU
+		{B67F4A7E-EF87-4CF7-9BB6-165E7C9409E4}.Release|x86.ActiveCfg = Release|Any CPU
+		{B67F4A7E-EF87-4CF7-9BB6-165E7C9409E4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

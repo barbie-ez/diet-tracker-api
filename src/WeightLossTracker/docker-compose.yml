@@ -1,43 +1,37 @@
 version: '3.4'
 
 services:
-  sql_db:
-    image: mcr.microsoft.com/mssql/server:2017-latest
-    networks:
-      - sql
-    container_name: sql_db
-    ports:
-      - 1433:1433
-    expose:  
-      - 1433
-    environment:
-      - ACCEPT_EULA=y
-      - SA_PASSWORD=Password@1
-    volumes:
-     - database:/var/opt/mssql
-  sql_database_creator:
-    image: mcr.microsoft.com/mssql/server:2017-latest
-    networks:
-      - sql
-    command: bash -c "echo sleep wait a bit till the db is up and running before attempting to create the Allready DB && sleep 7 && /opt/mssql-tools/bin/sqlcmd -S sql_db,1433 -U sa -P Password@1 -Q 'create database dietTrackerdb'"
-    depends_on:
-     - sql_db
   weightlosstracker.api:
+    image: weightlosstracker.api:latest
+    depends_on:
+     - "postgres_image"
     build:
       context: .
       dockerfile: ../WeightLossTracker.Api/Dockerfile
     ports:
       - '1234:1233'
-    networks:
-     - sql
     environment:
-     - DefaultConnection__ConnectionString=Server=sql_db;Database=dietTrackerdb;User=sa;Password=Password@1
+      DefaultConnection__ConnectionString: "host=postgres_image;port=5432;username=sa;password=Password@1;database=dietTrackerdb"
     restart: on-failure
-    depends_on:
-     - sql_db
-     - sql_database_creator
-networks:
-  sql:
+  postgres_image:
+    image: postgres:latest
+    ports:
+      - "5432"
+    expose:  
+      - 5432
+    restart: always
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - pgconf:/etc/postgresql
+      - pglog:/var/log/postgresql
+    environment:
+      POSTGRES_USER: sa
+      POSTGRES_PASSWORD: Password@1
+      POSTGRES_DB: "dietTrackerdb"
 volumes:
-  database:
-
+  pgdata:
+    driver: local
+  pgconf:
+    driver: local
+  pglog: 
+    driver: local

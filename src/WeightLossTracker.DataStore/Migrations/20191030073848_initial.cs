@@ -1,10 +1,10 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace WeightLossTracker.DataStore.Migrations
 {
-    public partial class init : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,15 +27,53 @@ namespace WeightLossTracker.DataStore.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    Height = table.Column<string>(nullable: true),
-                    CurrentWeight = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    Height = table.Column<float>(nullable: false),
+                    CurrentWeight = table.Column<float>(nullable: false),
+                    DateOfBirth = table.Column<DateTimeOffset>(nullable: false),
                     Token = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FoodModel",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    DateCreated = table.Column<DateTime>(nullable: false),
+                    DateUpdated = table.Column<DateTime>(nullable: false),
+                    DietaryFiber = table.Column<float>(nullable: false),
+                    Carbohydrates = table.Column<float>(nullable: false),
+                    Fats = table.Column<float>(nullable: false),
+                    Protein = table.Column<float>(nullable: false),
+                    Sugars = table.Column<float>(nullable: false),
+                    Calories = table.Column<int>(nullable: false),
+                    ServingSize = table.Column<string>(nullable: false),
+                    FoodName = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FoodModel", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MealCategoriesModel",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    DateCreated = table.Column<DateTime>(nullable: false),
+                    DateUpdated = table.Column<DateTime>(nullable: false),
+                    Name = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MealCategoriesModel", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -66,7 +104,7 @@ namespace WeightLossTracker.DataStore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -123,11 +161,70 @@ namespace WeightLossTracker.DataStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "WeightHistories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    DateCreated = table.Column<DateTime>(nullable: false),
+                    DateUpdated = table.Column<DateTime>(nullable: false),
+                    Weight = table.Column<float>(nullable: false),
+                    Comment = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WeightHistories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_WeightHistories_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DietTrackerModel",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    DateCreated = table.Column<DateTime>(nullable: false),
+                    DateUpdated = table.Column<DateTime>(nullable: false),
+                    MealCategoriesId = table.Column<int>(nullable: false),
+                    MemberId = table.Column<string>(nullable: false),
+                    FoodId = table.Column<int>(nullable: false),
+                    PortionSize = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DietTrackerModel", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DietTrackerModel_FoodModel_FoodId",
+                        column: x => x.FoodId,
+                        principalTable: "FoodModel",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DietTrackerModel_MealCategoriesModel_MealCategoriesId",
+                        column: x => x.MealCategoriesId,
+                        principalTable: "MealCategoriesModel",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DietTrackerModel_AspNetUsers_MemberId",
+                        column: x => x.MemberId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -176,8 +273,7 @@ namespace WeightLossTracker.DataStore.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoles_UserProfileModelId",
@@ -208,8 +304,27 @@ namespace WeightLossTracker.DataStore.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DietTrackerModel_FoodId",
+                table: "DietTrackerModel",
+                column: "FoodId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DietTrackerModel_MealCategoriesId",
+                table: "DietTrackerModel",
+                column: "MealCategoriesId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DietTrackerModel_MemberId",
+                table: "DietTrackerModel",
+                column: "MemberId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WeightHistories_UserId",
+                table: "WeightHistories",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -230,7 +345,19 @@ namespace WeightLossTracker.DataStore.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "DietTrackerModel");
+
+            migrationBuilder.DropTable(
+                name: "WeightHistories");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "FoodModel");
+
+            migrationBuilder.DropTable(
+                name: "MealCategoriesModel");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

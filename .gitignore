@@ -11,3 +11,4 @@ src/WeightLossTracker.Api/Properties
 /src/WeightLossTracker/obj/Docker
 /src/WeightLossTracker/obj/Debug
 /src/WeightLossTracker/bin/Debug
+/src/WeightLossTracker/heroku.yml

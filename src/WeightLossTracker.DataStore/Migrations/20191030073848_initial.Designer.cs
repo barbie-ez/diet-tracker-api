@@ -2,24 +2,24 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WeightLossTracker.DataStore;
 
 namespace WeightLossTracker.DataStore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191003111528_add relationship between diet tracker and memeber")]
-    partial class addrelationshipbetweendiettrackerandmemeber
+    [Migration("20191030073848_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -42,8 +42,7 @@ namespace WeightLossTracker.DataStore.Migrations
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
 
@@ -53,8 +52,7 @@ namespace WeightLossTracker.DataStore.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("ClaimType");
 
@@ -73,8 +71,7 @@ namespace WeightLossTracker.DataStore.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("ClaimType");
 
@@ -139,14 +136,13 @@ namespace WeightLossTracker.DataStore.Migrations
             modelBuilder.Entity("WeightLossTracker.DataStore.Entitties.DietTrackerModel", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("DateCreated");
 
                     b.Property<DateTime>("DateUpdated");
 
-                    b.Property<int>("FoodModelId");
+                    b.Property<int>("FoodId");
 
                     b.Property<int>("MealCategoriesId");
 
@@ -157,7 +153,7 @@ namespace WeightLossTracker.DataStore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FoodModelId");
+                    b.HasIndex("FoodId");
 
                     b.HasIndex("MealCategoriesId");
 
@@ -169,8 +165,7 @@ namespace WeightLossTracker.DataStore.Migrations
             modelBuilder.Entity("WeightLossTracker.DataStore.Entitties.FoodModel", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("Calories");
 
@@ -202,8 +197,7 @@ namespace WeightLossTracker.DataStore.Migrations
             modelBuilder.Entity("WeightLossTracker.DataStore.Entitties.MealCategoriesModel", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("DateCreated");
 
@@ -276,8 +270,7 @@ namespace WeightLossTracker.DataStore.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -285,8 +278,7 @@ namespace WeightLossTracker.DataStore.Migrations
             modelBuilder.Entity("WeightLossTracker.DataStore.Entitties.WeightHistories", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Comment");
 
@@ -294,13 +286,13 @@ namespace WeightLossTracker.DataStore.Migrations
 
                     b.Property<DateTime>("DateUpdated");
 
-                    b.Property<string>("UserProfileModelId");
+                    b.Property<string>("UserId");
 
                     b.Property<float>("Weight");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserProfileModelId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("WeightHistories");
                 });
@@ -369,7 +361,7 @@ namespace WeightLossTracker.DataStore.Migrations
                 {
                     b.HasOne("WeightLossTracker.DataStore.Entitties.FoodModel", "Food")
                         .WithMany()
-                        .HasForeignKey("FoodModelId")
+                        .HasForeignKey("FoodId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("WeightLossTracker.DataStore.Entitties.MealCategoriesModel", "MealCategories")
@@ -385,9 +377,9 @@ namespace WeightLossTracker.DataStore.Migrations
 
             modelBuilder.Entity("WeightLossTracker.DataStore.Entitties.WeightHistories", b =>
                 {
-                    b.HasOne("WeightLossTracker.DataStore.Entitties.UserProfileModel")
+                    b.HasOne("WeightLossTracker.DataStore.Entitties.UserProfileModel", "User")
                         .WithMany("WeightHistories")
-                        .HasForeignKey("UserProfileModelId");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("WeightLossTracker.DataStore.Entitties.UserRoleModel", b =>
