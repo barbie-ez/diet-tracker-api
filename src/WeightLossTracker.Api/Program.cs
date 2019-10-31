@@ -37,8 +37,7 @@ namespace WeightLossTracker.Api
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                //.UseUrls("http://*:1233")
-                .UseUrls("http://0.0.0.0:" + Environment.GetEnvironmentVariable("PORT"))
+                .UseUrls("http://*:1233")
                 ;
     }
 }
