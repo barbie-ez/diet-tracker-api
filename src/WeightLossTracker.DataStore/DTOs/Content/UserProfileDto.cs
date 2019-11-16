@@ -11,5 +11,6 @@ namespace WeightLossTracker.DataStore.DTOs.Content
         public float Weight;
         public int Age;
         public List<WeightHistoriesDto> WeightHistories { get; set; }
+        public int Id { get; set; }
     }
 }

@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using WeightLossTracker.DataStore.DTOs.Content;
 using WeightLossTracker.DataStore.DTOs.Creation;
 using WeightLossTracker.DataStore.Entitties;
@@ -19,10 +20,12 @@ namespace WeightLossTracker.Api.Controllers
     {
         private IFoodRepository _food { get; set; }
         private readonly IMapper _mapper;
-        public FoodController(IFoodRepository food, IMapper mapper)
+        private ILogger<FoodController> _logger;
+        public FoodController(IFoodRepository food, ILogger<FoodController> logger,IMapper mapper)
         {
             _food = food;
             _mapper = mapper;
+            _logger = logger;
         }
         [ProducesResponseType(StatusCodes.Status200OK)]
         [Produces("application/xml", "application/json")]
@@ -71,6 +74,7 @@ namespace WeightLossTracker.Api.Controllers
                 return BadRequest();
             }
 
+           
             var foodToAdd = _mapper.Map<FoodModel>(foodCreationDTO);
 
             var id = await _food.AddReturnAsync(foodToAdd);
@@ -179,6 +183,8 @@ namespace WeightLossTracker.Api.Controllers
             {
                 throw new Exception("Could not delete this food");
             }
+
+            _logger.LogInformation(100, $"Food with {foodFromRepo.Id} was just deleted");
 
             return NoContent();
         }

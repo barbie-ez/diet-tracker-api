@@ -9,5 +9,6 @@ namespace WeightLossTracker.DataStore.DTOs.Content
         public MealCategoriesDto MealCategories { get; set; }
         public FoodDto Food { get; set; }
         public int PortionSize { get; set; }
+        public int Id { get; set; }
     }
 }

@@ -14,5 +14,6 @@ namespace WeightLossTracker.DataStore.DTOs.Content
         public int Calories { get; set; }
         public string ServingSize { get; set; }
         public string FoodName { get; set; }
+        public int Id { get; set; }
     }
 }

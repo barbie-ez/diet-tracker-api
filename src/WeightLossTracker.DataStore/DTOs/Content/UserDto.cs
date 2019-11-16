@@ -17,5 +17,6 @@ namespace WeightLossTracker.DataStore.DTOs.Content
         /// users password data
         /// </summary>
         public string password;
+        public string Id { get; set; }
     }
 }
