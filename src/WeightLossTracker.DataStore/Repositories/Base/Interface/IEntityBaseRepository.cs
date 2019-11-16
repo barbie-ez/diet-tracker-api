@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using WeightLossTracker.DataStore.Helpers;
 
 namespace WeightLossTracker.DataStore.Repositories.Base.Interface
 {
@@ -12,6 +13,7 @@ namespace WeightLossTracker.DataStore.Repositories.Base.Interface
         Task<IEnumerable<T>> AllIncludingAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
         Task<IEnumerable<T>> AllIncludingAsync(params Expression<Func<T, object>>[] includeProperties);
         Task<IEnumerable<T>> GetAllAsync();
+        Task<PagedList<T>> GetAllAsync(ResourceParameters resourceParameters);
         Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] includeProperties);
         Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
 
