@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using WeightLossTracker.DataStore.Helpers;
 using WeightLossTracker.DataStore.Repositories.Base.Interface;
 
 namespace WeightLossTracker.DataStore.Repositories.Base.Impl
@@ -159,6 +160,12 @@ namespace WeightLossTracker.DataStore.Repositories.Base.Impl
         public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await _context.Set<T>().ToListAsync();
+        }
+        public async Task<PagedList<T>> GetAllAsync(ResourceParameters resourceParameters)
+        {
+            var collectionBeforePaging = _context.Set<T>();
+
+            return PagedList<T>.Create(collectionBeforePaging, resourceParameters.PageNumber, resourceParameters.PageSize);
         }
         public IQueryable<T> GetAllAsQueryable()
         {

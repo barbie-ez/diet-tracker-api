@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -97,6 +99,13 @@ namespace WeightLossTracker.Api
             services.AddTransient<IDietTrackerRepository, DietTrackerRepository>();
             services.AddTransient<IMealCategoryRepository, MealCategoryRepository>();
             services.AddTransient<IWeightHistoryRepository, WeightHistoryRepository>();
+
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            services.AddScoped<IUrlHelper, UrlHelper>(impl=>
+            {
+                var actionContext = impl.GetService<IActionContextAccessor>().ActionContext;
+                return new UrlHelper(actionContext);
+            });
 
             var mappingConfig = new MapperConfiguration(mc =>
             {

@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using WeightLossTracker.Api.Helpers;
 using WeightLossTracker.DataStore.DTOs.Content;
 using WeightLossTracker.DataStore.DTOs.Creation;
 using WeightLossTracker.DataStore.Entitties;
+using WeightLossTracker.DataStore.Helpers;
 using WeightLossTracker.DataStore.Repositories.Interface;
 
 namespace WeightLossTracker.Api.Controllers
@@ -19,26 +22,70 @@ namespace WeightLossTracker.Api.Controllers
     public class FoodController : Controller
     {
         private IFoodRepository _food { get; set; }
+        private IUrlHelper _urlHelper { get; set; }
         private readonly IMapper _mapper;
         private ILogger<FoodController> _logger;
-        public FoodController(IFoodRepository food, ILogger<FoodController> logger,IMapper mapper)
+        public FoodController(IFoodRepository food, ILogger<FoodController> logger,IMapper mapper, IUrlHelper urlHelper)
         {
             _food = food;
             _mapper = mapper;
             _logger = logger;
+            _urlHelper = urlHelper;
         }
         [ProducesResponseType(StatusCodes.Status200OK)]
         [Produces("application/xml", "application/json")]
-        [HttpGet()]
-        public async Task<ActionResult<IEnumerable<FoodDto>>> GetFoods()
+        [HttpGet(Name ="GetFoods")]
+        public async Task<ActionResult<IEnumerable<FoodDto>>> GetFoods([FromQuery]ResourceParameters resourceParameters)
         {
-            var foodFromRepo = await _food.GetAllAsync();
+
+            var foodFromRepo = await _food.GetAllAsync(resourceParameters);
+
+            var prevPageLink = foodFromRepo.HasPrevious ?
+                CreateResourceUri(resourceParameters, ResourceUriType.PreviousPage) : null;
+            var nextPageLink = foodFromRepo.HasNext ?
+                CreateResourceUri(resourceParameters, ResourceUriType.NextPage) : null;
+
+            var paginationMetaData = new
+            {
+                totalCount = foodFromRepo.TotalCount,
+                pageSize = foodFromRepo.PageSize,
+                currentPage = foodFromRepo.CurrentPage,
+                totalPages = foodFromRepo.TotalPages,
+                prevPageLink,
+                nextPageLink
+            };
+
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(paginationMetaData));
 
             var foodDTO = _mapper.Map<IEnumerable<FoodDto>>(foodFromRepo);
 
             return Ok(foodDTO);
         }
 
+        private string CreateResourceUri(ResourceParameters resourceParameters, ResourceUriType type)
+        {
+            switch (type)
+            {
+                case ResourceUriType.PreviousPage:
+                    return _urlHelper.Link("GetFoods", new
+                    {
+                        pageNumber = resourceParameters.PageNumber - 1,
+                        pageSize = resourceParameters.PageSize
+                    });
+                case ResourceUriType.NextPage:
+                    return _urlHelper.Link("GetFoods", new
+                    {
+                        pageNumber = resourceParameters.PageNumber + 1,
+                        pageSize = resourceParameters.PageSize
+                    });
+                default:
+                    return _urlHelper.Link("GetFoods", new
+                    {
+                        pageNumber = resourceParameters.PageNumber,
+                        pageSize = resourceParameters.PageSize
+                    });
+            }
+        }
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status200OK)]
