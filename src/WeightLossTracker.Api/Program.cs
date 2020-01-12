@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NLog.Web;
-using WeightLossTracker.DataStore.DataContext;
+using WeightLossTrackerData.DataContext;
 
 namespace WeightLossTracker.Api
 {

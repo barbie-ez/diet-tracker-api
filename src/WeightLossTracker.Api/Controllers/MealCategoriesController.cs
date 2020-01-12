@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WeightLossTracker.DataStore.DTOs.Content;
-using WeightLossTracker.DataStore.DTOs.Creation;
-using WeightLossTracker.DataStore.Entitties;
-using WeightLossTracker.DataStore.Repositories.Interface;
+using WeightLossTrackerData.DTOs.Content;
+using WeightLossTrackerData.DTOs.Creation;
+using WeightLossTrackerData.Entities;
+using WeightLossTrackerData.Repositories.Interface;
 
 namespace WeightLossTracker.Api.Controllers
 {

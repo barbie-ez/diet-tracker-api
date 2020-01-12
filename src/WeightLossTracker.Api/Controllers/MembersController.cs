@@ -13,11 +13,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using WeightLossTrackeData.Repositories.Impl;
 using WeightLossTracker.Api.Helpers;
-using WeightLossTracker.DataStore.DTOs;
-using WeightLossTracker.DataStore.DTOs.Content;
-using WeightLossTracker.DataStore.Entitties;
-using WeightLossTracker.DataStore.Repositories.Impl;
+using WeightLossTrackerData.DTOs.Content;
+using WeightLossTrackerData.Entities;
 
 namespace WeightLossTracker.Api.Controllers
 {
