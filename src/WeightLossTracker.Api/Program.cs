@@ -39,7 +39,6 @@ namespace WeightLossTracker.Api
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .UseNLog()
-                .UseUrls("http://*:1233")
                 ;
     }
 }

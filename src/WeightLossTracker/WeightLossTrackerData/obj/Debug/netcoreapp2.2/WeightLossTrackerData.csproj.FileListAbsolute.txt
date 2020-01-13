@@ -1,10 +1,10 @@
 /Users/barbaraezomo/Documents/React Projects/diet-tracker-api/src/WeightLossTracker/WeightLossTrackerData/bin/Debug/netcoreapp2.2/WeightLossTrackerData.deps.json
+/Users/barbaraezomo/Documents/React Projects/diet-tracker-api/src/WeightLossTracker/WeightLossTrackerData/bin/Debug/netcoreapp2.2/WeightLossTrackerData.runtimeconfig.json
+/Users/barbaraezomo/Documents/React Projects/diet-tracker-api/src/WeightLossTracker/WeightLossTrackerData/bin/Debug/netcoreapp2.2/WeightLossTrackerData.runtimeconfig.dev.json
 /Users/barbaraezomo/Documents/React Projects/diet-tracker-api/src/WeightLossTracker/WeightLossTrackerData/bin/Debug/netcoreapp2.2/WeightLossTrackerData.dll
 /Users/barbaraezomo/Documents/React Projects/diet-tracker-api/src/WeightLossTracker/WeightLossTrackerData/bin/Debug/netcoreapp2.2/WeightLossTrackerData.pdb
+/Users/barbaraezomo/Documents/React Projects/diet-tracker-api/src/WeightLossTracker/WeightLossTrackerData/obj/Debug/netcoreapp2.2/WeightLossTrackerData.csprojAssemblyReference.cache
 /Users/barbaraezomo/Documents/React Projects/diet-tracker-api/src/WeightLossTracker/WeightLossTrackerData/obj/Debug/netcoreapp2.2/WeightLossTrackerData.AssemblyInfoInputs.cache
 /Users/barbaraezomo/Documents/React Projects/diet-tracker-api/src/WeightLossTracker/WeightLossTrackerData/obj/Debug/netcoreapp2.2/WeightLossTrackerData.AssemblyInfo.cs
 /Users/barbaraezomo/Documents/React Projects/diet-tracker-api/src/WeightLossTracker/WeightLossTrackerData/obj/Debug/netcoreapp2.2/WeightLossTrackerData.dll
 /Users/barbaraezomo/Documents/React Projects/diet-tracker-api/src/WeightLossTracker/WeightLossTrackerData/obj/Debug/netcoreapp2.2/WeightLossTrackerData.pdb
-/Users/barbaraezomo/Documents/React Projects/diet-tracker-api/src/WeightLossTracker/WeightLossTrackerData/obj/Debug/netcoreapp2.2/WeightLossTrackerData.csprojAssemblyReference.cache
-/Users/barbaraezomo/Documents/React Projects/diet-tracker-api/src/WeightLossTracker/WeightLossTrackerData/bin/Debug/netcoreapp2.2/WeightLossTrackerData.runtimeconfig.json
-/Users/barbaraezomo/Documents/React Projects/diet-tracker-api/src/WeightLossTracker/WeightLossTrackerData/bin/Debug/netcoreapp2.2/WeightLossTrackerData.runtimeconfig.dev.json
