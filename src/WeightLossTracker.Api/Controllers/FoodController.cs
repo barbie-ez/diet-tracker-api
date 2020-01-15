@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,7 @@ using WeightLossTracker.DataStore.Repositories.Interface;
 
 namespace WeightLossTracker.Api.Controllers
 {
+    [Authorize]
     [Route("api/food")]
     [ApiController]
     public class FoodController : Controller
@@ -86,6 +88,7 @@ namespace WeightLossTracker.Api.Controllers
                     });
             }
         }
+
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status200OK)]

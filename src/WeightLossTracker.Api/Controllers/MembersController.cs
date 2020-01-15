@@ -52,14 +52,14 @@ namespace WeightLossTracker.Api.Controllers
 
             if (user == null)
             {
-                return null;
+                return Json("User Does not Exist");
             }
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, userdto.password, false);
 
             if (!result.Succeeded)
             {
-                return null;
+                return Json( "Invalid Password");
             }
 
             var tokenHandler = new JwtSecurityTokenHandler();

@@ -118,6 +118,10 @@ namespace WeightLossTracker.Api
 
             services.AddSwaggerGen(setupAction =>
             {
+                var security = new Dictionary<string, IEnumerable<string>>
+                {
+                    {"Bearer", new string[] { }},
+                };
                 setupAction.SwaggerDoc("DietTrackerOpenApiSpecification", 
                     new Info() {
                         Title= "Diet tracker API",
@@ -146,8 +150,10 @@ namespace WeightLossTracker.Api
                     Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
                     Name = "Authorization",
                     In = "header",
-                    Type = "apiKey"
+                    Type = "apiKey",
                 });
+
+                setupAction.AddSecurityRequirement(security);
             });
         }
 
