@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeightLossTracker.Api", "..\WeightLossTracker.Api\WeightLossTracker.Api.csproj", "{1DA4D916-93FA-4D32-B83C-32AFDE9F7A2E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeightLossTracker.DataStore", "..\WeightLossTracker.DataStore\WeightLossTracker.DataStore.csproj", "{2C21A844-713B-4E31-AC62-0A286213D021}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeightLossTracker.DataStoreTest", "..\WeightLossTracker.DataStoreTest\WeightLossTracker.DataStoreTest.csproj", "{C88012C7-209F-40F1-A65B-47FF79AD6E9D}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{01E84E9C-CE79-4955-98DB-81BA3F796EDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeightLossTrackerData", "WeightLossTrackerData\WeightLossTrackerData.csproj", "{E915E2A4-A3AF-4AC5-8B40-B37C82D361BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,18 +33,6 @@ Global
 		{1DA4D916-93FA-4D32-B83C-32AFDE9F7A2E}.Release|x64.Build.0 = Release|Any CPU
 		{1DA4D916-93FA-4D32-B83C-32AFDE9F7A2E}.Release|x86.ActiveCfg = Release|Any CPU
 		{1DA4D916-93FA-4D32-B83C-32AFDE9F7A2E}.Release|x86.Build.0 = Release|Any CPU
-		{2C21A844-713B-4E31-AC62-0A286213D021}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2C21A844-713B-4E31-AC62-0A286213D021}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2C21A844-713B-4E31-AC62-0A286213D021}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{2C21A844-713B-4E31-AC62-0A286213D021}.Debug|x64.Build.0 = Debug|Any CPU
-		{2C21A844-713B-4E31-AC62-0A286213D021}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{2C21A844-713B-4E31-AC62-0A286213D021}.Debug|x86.Build.0 = Debug|Any CPU
-		{2C21A844-713B-4E31-AC62-0A286213D021}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2C21A844-713B-4E31-AC62-0A286213D021}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2C21A844-713B-4E31-AC62-0A286213D021}.Release|x64.ActiveCfg = Release|Any CPU
-		{2C21A844-713B-4E31-AC62-0A286213D021}.Release|x64.Build.0 = Release|Any CPU
-		{2C21A844-713B-4E31-AC62-0A286213D021}.Release|x86.ActiveCfg = Release|Any CPU
-		{2C21A844-713B-4E31-AC62-0A286213D021}.Release|x86.Build.0 = Release|Any CPU
 		{C88012C7-209F-40F1-A65B-47FF79AD6E9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C88012C7-209F-40F1-A65B-47FF79AD6E9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C88012C7-209F-40F1-A65B-47FF79AD6E9D}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -69,6 +57,18 @@ Global
 		{01E84E9C-CE79-4955-98DB-81BA3F796EDF}.Release|x64.Build.0 = Release|Any CPU
 		{01E84E9C-CE79-4955-98DB-81BA3F796EDF}.Release|x86.ActiveCfg = Release|Any CPU
 		{01E84E9C-CE79-4955-98DB-81BA3F796EDF}.Release|x86.Build.0 = Release|Any CPU
+		{E915E2A4-A3AF-4AC5-8B40-B37C82D361BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E915E2A4-A3AF-4AC5-8B40-B37C82D361BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E915E2A4-A3AF-4AC5-8B40-B37C82D361BA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E915E2A4-A3AF-4AC5-8B40-B37C82D361BA}.Debug|x64.Build.0 = Debug|Any CPU
+		{E915E2A4-A3AF-4AC5-8B40-B37C82D361BA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E915E2A4-A3AF-4AC5-8B40-B37C82D361BA}.Debug|x86.Build.0 = Debug|Any CPU
+		{E915E2A4-A3AF-4AC5-8B40-B37C82D361BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E915E2A4-A3AF-4AC5-8B40-B37C82D361BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E915E2A4-A3AF-4AC5-8B40-B37C82D361BA}.Release|x64.ActiveCfg = Release|Any CPU
+		{E915E2A4-A3AF-4AC5-8B40-B37C82D361BA}.Release|x64.Build.0 = Release|Any CPU
+		{E915E2A4-A3AF-4AC5-8B40-B37C82D361BA}.Release|x86.ActiveCfg = Release|Any CPU
+		{E915E2A4-A3AF-4AC5-8B40-B37C82D361BA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,11 +13,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using WeightLossTrackeData.Repositories.Impl;
 using WeightLossTracker.Api.Helpers;
-using WeightLossTracker.DataStore.DTOs;
-using WeightLossTracker.DataStore.DTOs.Content;
-using WeightLossTracker.DataStore.Entitties;
-using WeightLossTracker.DataStore.Repositories.Impl;
+using WeightLossTrackerData.Constants;
+using WeightLossTrackerData.DTOs.Content;
+using WeightLossTrackerData.DTOs.Creation;
+using WeightLossTrackerData.Entities;
 
 namespace WeightLossTracker.Api.Controllers
 {
@@ -81,6 +82,47 @@ namespace WeightLossTracker.Api.Controllers
 
             
             return Json(tokenHandler.WriteToken(token));
+        }
+        [AllowAnonymous]
+        [HttpPost("signup")]
+        public async Task<ActionResult> SignUpMember( UserCreationDTO user)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    UserProfileModel newUser = new UserProfileModel();
+                    newUser.Email = newUser.UserName = user.Email;
+                    newUser.FirstName = user.FirstName;
+                    newUser.LastName = user.LastName;
+                    newUser.Height = user.Height;
+                    newUser.CurrentWeight = user.CurrentWeight;
+                    newUser.DateOfBirth = new DateTimeOffset(Convert.ToDateTime(user.DateOfBirth));
+                    newUser.PhoneNumber = user.PhoneNumber;
+
+                    var result = _memberManager.CreateAsync(newUser, user.Password).GetAwaiter().GetResult();
+                    var token = _memberManager.GenerateEmailConfirmationTokenAsync(newUser).GetAwaiter().GetResult();
+                    var confirmEmail = _memberManager.ConfirmEmailAsync(newUser, token).GetAwaiter().GetResult();
+                    if (confirmEmail.Succeeded)
+                    {
+                        if (result.Succeeded)
+                        {
+                            var newResult = _memberManager.AddToRoleAsync(newUser, AppRoles.Member).GetAwaiter().GetResult();
+                            if (newResult.Succeeded)
+                            {
+                                return Json("User created Successfully");
+                            }
+                        }
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    return Json(ex.Message);
+                }
+            }
+            return Json("ModelState not valid");
         }
 
         [HttpGet("{id}")]

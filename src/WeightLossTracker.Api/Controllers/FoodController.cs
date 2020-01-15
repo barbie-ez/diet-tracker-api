@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using WeightLossTracker.Api.Helpers;
-using WeightLossTracker.DataStore.DTOs.Content;
-using WeightLossTracker.DataStore.DTOs.Creation;
-using WeightLossTracker.DataStore.Entitties;
-using WeightLossTracker.DataStore.Helpers;
-using WeightLossTracker.DataStore.Repositories.Interface;
+using WeightLossTrackerData.DTOs.Content;
+using WeightLossTrackerData.DTOs.Creation;
+using WeightLossTrackerData.Entities;
+using WeightLossTrackerData.Helpers;
+using WeightLossTrackerData.Repositories.Interface;
 
 namespace WeightLossTracker.Api.Controllers
 {

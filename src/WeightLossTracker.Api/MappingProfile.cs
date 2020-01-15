@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WeightLossTracker.Api.Helpers;
-using WeightLossTracker.DataStore.DTOs;
-using WeightLossTracker.DataStore.DTOs.Content;
-using WeightLossTracker.DataStore.DTOs.Creation;
-using WeightLossTracker.DataStore.Entitties;
+using WeightLossTrackerData.DTOs.Content;
+using WeightLossTrackerData.DTOs.Creation;
+using WeightLossTrackerData.Entities;
 
 namespace WeightLossTracker.Api
 {

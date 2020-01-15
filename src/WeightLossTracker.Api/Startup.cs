@@ -25,11 +25,13 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using NLog.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
+using WeightLossTrackeData.Repositories.Impl;
 using WeightLossTracker.Api.Helpers;
 using WeightLossTracker.DataStore;
-using WeightLossTracker.DataStore.Entitties;
 using WeightLossTracker.DataStore.Repositories.Impl;
-using WeightLossTracker.DataStore.Repositories.Interface;
+using WeightLossTrackerData.DataContext;
+using WeightLossTrackerData.Entities;
+using WeightLossTrackerData.Repositories.Interface;
 
 namespace WeightLossTracker.Api
 {
@@ -46,7 +48,7 @@ namespace WeightLossTracker.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), x => x.MigrationsAssembly("WebApplication")));
 
             services.AddIdentity<UserProfileModel, UserRoleModel>(config =>
             {

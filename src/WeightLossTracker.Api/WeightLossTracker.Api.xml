@@ -25,7 +25,7 @@
             ]
             </remarks>
         </member>
-        <member name="M:WeightLossTracker.Api.Controllers.MembersController.Login(WeightLossTracker.DataStore.DTOs.Content.UserDto)">
+        <member name="M:WeightLossTracker.Api.Controllers.MembersController.Login(WeightLossTrackerData.DTOs.Content.UserDto)">
             <summary>
             Get Token to authorise session
             </summary>
